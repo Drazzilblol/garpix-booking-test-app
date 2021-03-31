@@ -1,5 +1,5 @@
 export interface IRoom {
-  roomId: string;
+  id: string;
   roomType: string;
   number: number;
   pricePerDay: number;

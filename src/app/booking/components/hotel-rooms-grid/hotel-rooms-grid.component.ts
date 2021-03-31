@@ -23,6 +23,8 @@ export class HotelRoomsGridComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort: MatSort;
 
+  filter: IRoomFilter;
+
   constructor(private bookingApiService: BookingApiService, private store: Store<IStore>, public dialog: MatDialog) {
   }
 
@@ -31,6 +33,7 @@ export class HotelRoomsGridComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.store.pipe(select(selectRoomFilter)).subscribe(filter => {
+      this.filter = filter;
       this.loadLessonsPage(filter);
     });
 
@@ -38,7 +41,7 @@ export class HotelRoomsGridComponent implements OnInit, AfterViewInit {
 
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
-        tap(() => this.loadLessonsPage())
+        tap(() => this.loadLessonsPage(this.filter))
       )
       .subscribe();
   }
@@ -64,7 +67,7 @@ export class HotelRoomsGridComponent implements OnInit, AfterViewInit {
     console.log(room);
     const dialogRef = this.dialog.open(HotelRoomsBookingDialogComponent, {
       width: '300px',
-      data: {roomId: room.roomId}
+      data: {roomId: room.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
