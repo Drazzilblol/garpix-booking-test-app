@@ -64,7 +64,6 @@ export class HotelRoomsGridComponent implements OnInit, AfterViewInit {
    * Диалог резервации комнаты
    */
   openBookingDialog(room: IRoom): void {
-    console.log(room);
     const dialogRef = this.dialog.open(HotelRoomsBookingDialogComponent, {
       width: '300px',
       data: {roomId: room.id}
