@@ -47,7 +47,7 @@ export class BookingApiService {
     email: string,
     dateRange: IDateRange
   ): Observable<IReservationRoomsResult> {
-    return this.http.post<IReservationRoomsResult>(`api/rooms/reservation?roomId=${roomId}`, {
+    return this.http.post<IReservationRoomsResult>(`api/rooms/reservation/${roomId}`, {
       user: {
         firstName,
         lastName,
